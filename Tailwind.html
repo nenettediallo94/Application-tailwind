@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Application TailwindCSS</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Petite animation d'ouverture */
+    .fade-in {
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-gray-100 text-gray-800 font-serif">
+
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 mt-10 bg-gradient-to-r from-blue-100 to-pink-200 shadow-lg rounded-tl-3xl rounded-br-3xl">
+
+    <!-- Header avec menu responsive -->
+    <header class="mb-10">
+      <div class="flex justify-between items-center">
+        <h1 class="text-2xl font-bold">Hello Word</h1>
+
+        <!-- Bouton hamburger -->
+        <button id="menu-btn" class="sm:hidden focus:outline-none">
+          <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" stroke-width="2"
+            viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Menu navigation -->
+      <nav id="menu" class="hidden sm:flex flex-col sm:flex-row justify-center sm:justify-end gap-4 mt-4 sm:mt-0 text-base sm:text-lg font-semibold">
+        <a href="#" class="hover:underline">Home</a>
+        <a href="#" class="hover:underline">About</a>
+        <a href="#" class="hover:underline">Blog</a>
+        <a href="#" class="hover:underline">Support</a>
+        <a href="#" class="hover:underline">Contact us</a>
+      </nav>
+    </header>
+
+    <!-- Contenu principal -->
+    <div class="flex flex-col lg:flex-row items-center">
+
+      <!-- Texte -->
+      <div class="flex-1 space-y-4 text-center lg:text-left">
+        <h2 class="text-lg sm:text-xl lg:text-2xl font-bold">Hello, welcome to “Hello Word!”</h2>
+        <p class="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900">
+          Begin your coding <br> Adventure with “Hello Word”
+        </p>
+        <p class="text-sm sm:text-base text-gray-700">
+          Learn the Basics of Programming in a Friendly Environment
+        </p>
+
+        <!-- Boutons -->
+        <div class="mt-6 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+          <button type="button"
+            class="bg-red-600 text-white px-6 py-2 rounded-md shadow hover:bg-red-700 font-semibold text-sm sm:text-base">
+            Let’s get started
+          </button>
+          <button type="button"
+            class="bg-orange-500 text-white px-6 py-2 rounded-md shadow hover:bg-orange-600 font-semibold text-sm sm:text-base">
+            Community
+          </button>
+        </div>
+      </div>
+
+      <!-- Image -->
+      <div class="flex-1 mt-6 sm:mt-10 lg:mt-0 flex justify-center">
+        <img src="Voyagetailwind.jpg" alt="Globe"
+          class="w-full max-w-md h-auto shadow-lg rounded-lg object-cover">
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Script JS pour ouvrir/fermer le menu -->
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const menu = document.getElementById('menu');
+
+    menuBtn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+      menu.classList.toggle('fade-in');
+    });
+  </script>
+
+</body>
+
+</html>

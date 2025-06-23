@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>To-Do Liste 6 Mois Interactive</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen p-6">
+
+  <div class="max-w-4xl mx-auto">
+    <h1 class="text-3xl font-bold text-center mb-8 text-gray-800">📅 To-Do Liste sur 6 Mois</h1>
+
+    <div id="todoContainer" class="space-y-6">
+      <!-- Les mois seront injectés ici par JS -->
+    </div>
+  </div>
+
+  <script>
+    // Données des tâches pour chaque mois
+    const months = [
+      { name: "Juin 2025", color: "blue", emoji: "🌞", tasks: [
+        "Planifier les objectifs",
+        "Faire un bilan personnel",
+        "Organiser une réunion mensuelle"
+      ]},
+      { name: "Juillet 2025", color: "green", emoji: "🌿", tasks: [
+        "Lire 2 livres de développement personnel",
+        "Revoir les objectifs du mois",
+        "Commencer un nouveau projet"
+      ]},
+      { name: "Août 2025", color: "purple", emoji: "🍇", tasks: [
+        "Suivre une formation en ligne",
+        "Faire le point financier",
+        "Participer à un atelier"
+      ]},
+      { name: "Septembre 2025", color: "red", emoji: "🍁", tasks: [
+        "Lancer une campagne marketing",
+        "Analyser les retours clients",
+        "Réviser les stratégies"
+      ]},
+      { name: "Octobre 2025", color: "yellow", emoji: "🍂", tasks: [
+        "Organiser un événement",
+        "Former l'équipe",
+        "Préparer le bilan trimestriel"
+      ]},
+      { name: "Novembre 2025", color: "indigo", emoji: "❄️", tasks: [
+        "Mettre à jour le site web",
+        "Planifier les actions pour l'année prochaine",
+        "Faire un rapport annuel"
+      ]}
+    ];
+
+    const container = document.getElementById("todoContainer");
+
+    // Fonction pour récupérer l'état des tâches dans localStorage
+    function loadTasksStatus() {
+      const saved = localStorage.getItem("todoStatus");
+      return saved ? JSON.parse(saved) : {};
+    }
+
+    // Fonction pour sauvegarder l'état dans localStorage
+    function saveTasksStatus(status) {
+      localStorage.setItem("todoStatus", JSON.stringify(status));
+    }
+
+    // Charger l'état actuel
+    let todoStatus = loadTasksStatus();
+
+    // Fonction pour créer la liste des mois et tâches
+    function renderTodos() {
+      container.innerHTML = "";
+
+      months.forEach((month, monthIndex) => {
+        // Couleur Tailwind à appliquer
+        const colorClass = `text-${month.color}-700`;
+
+        // Conteneur mois
+        const monthDiv = document.createElement("div");
+        monthDiv.className = "bg-white shadow-md rounded-xl p-5";
+
+        // Titre mois
+        const h2 = document.createElement("h2");
+        h2.className = `text-xl font-semibold mb-4 ${colorClass}`;
+        h2.textContent = `${month.emoji} Mois ${monthIndex + 1} : ${month.name}`;
+        monthDiv.appendChild(h2);
+
+        // Liste tâches
+        const ul = document.createElement("ul");
+        ul.className = "space-y-3";
+
+        month.tasks.forEach((task, taskIndex) => {
+          const li = document.createElement("li");
+          li.className = "flex items-center justify-between";
+
+          // Label pour checkbox
+          const label = document.createElement("label");
+          label.className = "flex items-center space-x-3 cursor-pointer w-full";
+
+          const checkbox = document.createElement("input");
+          checkbox.type = "checkbox";
+          checkbox.className = `h-5 w-5 rounded border-gray-300 text-${month.color}-600`;
+          checkbox.id = `todo-${monthIndex}-${taskIndex}`;
+
+          // Vérifier si la tâche est cochée dans localStorage
+          if(todoStatus[checkbox.id]) {
+            checkbox.checked = true;
+          }
+
+          const span = document.createElement("span");
+          span.textContent = task;
+
+          label.appendChild(checkbox);
+          label.appendChild(span);
+
+          li.appendChild(label);
+          ul.appendChild(li);
+
+          // Écouter le changement de la checkbox
+          checkbox.addEventListener("change", () => {
+            todoStatus[checkbox.id] = checkbox.checked;
+            saveTasksStatus(todoStatus);
+          });
+        });
+
+        monthDiv.appendChild(ul);
+        container.appendChild(monthDiv);
+      });
+    }
+
+    // Initialiser le rendu
+    renderTodos();
+
+  </script>
+
+</body>
+</html>
