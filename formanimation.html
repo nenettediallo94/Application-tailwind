@@ -160,15 +160,15 @@
         </div>
     </div>
     <script>
-        // Sélection des éléments du formulaire
+   
         const form = document.querySelector('form');
         const emailInput = form.querySelector('input[type="email"]');
         const passwordInput = form.querySelector('input[type="password"]');
         const signInButton = form.querySelector('button');
 
-        // Empêcher la soumission du formulaire si les champs sont vides
+    
         form.addEventListener('submit', function (e) {
-            e.preventDefault(); // Empêche le rechargement de la page
+            e.preventDefault(); //
 
             const email = emailInput.value.trim();
             const password = passwordInput.value.trim();
@@ -177,11 +177,11 @@
                 alert('Veuillez remplir tous les champs.');
             } else {
                 alert('Connexion réussie !');
-                // Ici, tu pourrais ajouter une redirection ou une requête AJAX
+            
             }
         });
 
-        // BONUS : Afficher / masquer le mot de passe (facultatif)
+  
         const togglePassword = document.createElement('span');
         togglePassword.textContent = '👁️';
         togglePassword.style.cursor = 'pointer';
@@ -194,7 +194,7 @@
             togglePassword.textContent = type === 'password' ? '👁️' : '🙈';
         });
 
-        // Effet visuel lors du clic sur "Sign In"
+  
         signInButton.addEventListener('mousedown', () => {
             signInButton.style.transform = 'scale(0.98)';
         });
